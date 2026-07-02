@@ -25,14 +25,14 @@ jobs:
       - run: npm run build
       - run: npm run typecheck
 
-      # Dogfooding: ctxbudget audits its own context files and writes SARIF.
+      # Dogfooding: ctxweight audits its own context files and writes SARIF.
       # continue-on-error keeps THIS step from failing the job — generating the
       # report and deciding pass/fail are intentionally separate (the CI-safe
-      # pattern ctxbudget implements: emit the report first, gate after). The real
+      # pattern ctxweight implements: emit the report first, gate after). The real
       # pass/fail decision lives in the gate step below.
       - name: Context audit (self) — generate SARIF
         continue-on-error: true
-        run: node dist/cli.js . --sarif > ctxbudget.sarif
+        run: node dist/cli.js . --sarif > ctxweight.sarif
 
       # Real gate: break the build only if a secret ever lands in a context file.
       # On the current clean repo this exits 0.
@@ -40,9 +40,9 @@ jobs:
         run: node dist/cli.js . --fail-on secrets/private-key,secrets/aws-key,secrets/openai-key,secrets/generic-token
 
       # if: always() so the SARIF is uploaded even when the gate step above fails
-      # — findings always reach the Security tab, mirroring ctxbudget's design.
+      # — findings always reach the Security tab, mirroring ctxweight's design.
       - name: Upload SARIF
         if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ctxbudget.sarif
+          sarif_file: ctxweight.sarif

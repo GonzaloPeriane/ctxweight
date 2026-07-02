@@ -1,10 +1,10 @@
 {
-  "name": "ctxbudget",
+  "name": "ctxweight",
   "version": "0.1.0",
   "description": "X-ray your AI agent's context — health and token cost in one command.",
   "type": "module",
   "bin": {
-    "ctxbudget": "dist/cli.js"
+    "ctxweight": "dist/cli.js"
   },
   "files": [
     "dist"
@@ -24,11 +24,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GonzaloPeriane/ctxbudget.git"
+    "url": "git+https://github.com/GonzaloPeriane/ctxweight.git"
   },
-  "homepage": "https://github.com/GonzaloPeriane/ctxbudget#readme",
+  "homepage": "https://github.com/GonzaloPeriane/ctxweight#readme",
   "bugs": {
-    "url": "https://github.com/GonzaloPeriane/ctxbudget/issues"
+    "url": "https://github.com/GonzaloPeriane/ctxweight/issues"
   },
   "keywords": [
     "ai",
@@ -41,8 +41,7 @@
     "mcp",
     "cli",
     "linter",
-    "budget",
-    "token-budget"
+    "context-weight"
   ],
   "author": "GonzaloPeriane",
   "license": "Apache-2.0",

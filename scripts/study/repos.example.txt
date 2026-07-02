@@ -3,4 +3,4 @@
 # Exercises every outcome: ok (has context) · n/a (no context) · error (bad URL).
 https://github.com/browser-use/browser-use
 https://github.com/octocat/Hello-World
-https://github.com/octocat/ctxbudget-does-not-exist
+https://github.com/octocat/ctxweight-does-not-exist

@@ -2,6 +2,6 @@ node_modules/
 dist/
 *.log
 .DS_Store
-ctxbudget-report.md
-ctxbudget.sarif
+ctxweight-report.md
+ctxweight.sarif
 scripts/study/results/
