@@ -8,14 +8,14 @@ import { renderMarkdown } from "./report/markdown.js";
 import { toSarif } from "./report/sarif.js";
 import type { BudgetReport, Finding, HealthReport, Severity } from "./core/types.js";
 
-const REPORT_FILE = "ctxaudit-report.md";
+const REPORT_FILE = "ctxbudget-report.md";
 
-const HELP = `ctxaudit — X-ray your AI agent's context (health + token cost).
+const HELP = `ctxbudget — X-ray your AI agent's context (health + token cost).
 
 Usage:
-  ctxaudit [path]                 run health + budget (default: .)
-  ctxaudit health [path]          context quality checks only
-  ctxaudit budget [path]          token cost breakdown only
+  ctxbudget [path]                 run health + budget (default: .)
+  ctxbudget health [path]          context quality checks only
+  ctxbudget budget [path]          token cost breakdown only
 
 Options:
   --model <name>   pricing model for cost estimate (claude-opus, claude-sonnet, ...)
@@ -105,7 +105,7 @@ async function main() {
     const winner = wantSarif ? "--sarif" : "--json"; // --md never wins stdout when >1 requested
     const mdNote = wantMd ? ` --md still writes ${REPORT_FILE}.` : "";
     console.error(
-      `ctxaudit: multiple stdout formats requested (${combo.join(", ")}); ` +
+      `ctxbudget: multiple stdout formats requested (${combo.join(", ")}); ` +
         `using ${winner} (precedence: sarif > json > md > terminal).${mdNote}`,
     );
   }
@@ -155,7 +155,7 @@ async function main() {
       if (res.lowestSev) reasons.push(`${res.sevMatches.length} at or above severity "${res.lowestSev}"`);
       if (res.codes.length) reasons.push(`${res.codeMatches.length} matching code(s): ${res.codes.join(", ")}`);
       console.error(
-        `ctxaudit: --fail-on triggered — ${res.matched.length} health finding(s) matched (${reasons.join("; ")}).`,
+        `ctxbudget: --fail-on triggered — ${res.matched.length} health finding(s) matched (${reasons.join("; ")}).`,
       );
       process.exitCode = 1;
     }
@@ -163,6 +163,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("ctxaudit error:", err?.message ?? err);
+  console.error("ctxbudget error:", err?.message ?? err);
   process.exit(1);
 });

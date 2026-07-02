@@ -1,13 +1,10 @@
 {
-  "name": "@gperiane/ctxaudit",
+  "name": "ctxbudget",
   "version": "0.1.0",
   "description": "X-ray your AI agent's context — health and token cost in one command.",
   "type": "module",
   "bin": {
-    "ctxaudit": "dist/cli.js"
-  },
-  "publishConfig": {
-    "access": "public"
+    "ctxbudget": "dist/cli.js"
   },
   "files": [
     "dist"
@@ -27,11 +24,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GonzaloPeriane/ctxaudit.git"
+    "url": "git+https://github.com/GonzaloPeriane/ctxbudget.git"
   },
-  "homepage": "https://github.com/GonzaloPeriane/ctxaudit#readme",
+  "homepage": "https://github.com/GonzaloPeriane/ctxbudget#readme",
   "bugs": {
-    "url": "https://github.com/GonzaloPeriane/ctxaudit/issues"
+    "url": "https://github.com/GonzaloPeriane/ctxbudget/issues"
   },
   "keywords": [
     "ai",
@@ -43,7 +40,9 @@
     "tokens",
     "mcp",
     "cli",
-    "linter"
+    "linter",
+    "budget",
+    "token-budget"
   ],
   "author": "GonzaloPeriane",
   "license": "Apache-2.0",

@@ -88,10 +88,10 @@ function main(): void {
   const scanDate = dates.length ? dates[dates.length - 1].slice(0, 10) : "unknown";
 
   const L: string[] = [];
-  L.push("# ctxaudit study");
+  L.push("# ctxbudget study");
   L.push("");
   L.push(
-    `_Aggregated scan of **${total}** public repositories' agent context, generated ${scanDate} with [ctxaudit](https://github.com/GonzaloPeriane/ctxaudit). Only aggregate numbers are published — no repo content, no per-repo security findings. Reproduce with \`npm run study && npm run study:aggregate\`._`,
+    `_Aggregated scan of **${total}** public repositories' agent context, generated ${scanDate} with [ctxbudget](https://github.com/GonzaloPeriane/ctxbudget). Only aggregate numbers are published — no repo content, no per-repo security findings. Reproduce with \`npm run study && npm run study:aggregate\`._`,
   );
   L.push("");
   L.push("## Coverage");
@@ -162,13 +162,13 @@ function main(): void {
   L.push("## Methodology & limitations");
   L.push("");
   L.push(
-    "- Each repo was `git clone --depth 1`'d into a temp dir, scanned with `ctxaudit <dir> --json`, then the clone was deleted. Nothing left the machine; only the aggregate numbers above are published.",
+    "- Each repo was `git clone --depth 1`'d into a temp dir, scanned with `ctxbudget <dir> --json`, then the clone was deleted. Nothing left the machine; only the aggregate numbers above are published.",
   );
   L.push(
-    "- **Approximate tokenizer.** Token counts use ctxaudit's tokenizer (gpt-tokenizer / o200k_base); real agents vary by model, so treat figures as comparison estimates, not exact billing.",
+    "- **Approximate tokenizer.** Token counts use ctxbudget's tokenizer (gpt-tokenizer / o200k_base); real agents vary by model, so treat figures as comparison estimates, not exact billing.",
   );
   L.push(
-    "- **Static context only.** ctxaudit measures files on disk; it does **not** follow dynamic memory systems (MemPalace, mem0, …) or runtime RAG, so a repo that injects context at runtime can cost more than shown.",
+    "- **Static context only.** ctxbudget measures files on disk; it does **not** follow dynamic memory systems (MemPalace, mem0, …) or runtime RAG, so a repo that injects context at runtime can cost more than shown.",
   );
   L.push(
     "- **always-on vs on-demand is a heuristic** by file type: root files (CLAUDE.md, AGENTS.md, .cursorrules, MCP schemas) count as always-on; `SKILL.md` and `.cursor/rules/*.mdc` as on-demand.",
@@ -177,7 +177,7 @@ function main(): void {
     "- **\"Truncated\"** means a file exceeds 32 KiB (the size some agents hard-cut); it does not confirm a specific agent truncated it in practice.",
   );
   L.push(
-    "- **Secret findings were verified by hand for this study.** ctxaudit downgrades documentation placeholders to `info` via a pattern list plus a Shannon-entropy heuristic, but that classifier can still leave the odd false positive — so every flagged \"secret\" was reviewed manually, and none was a real credential.",
+    "- **Secret findings were verified by hand for this study.** ctxbudget downgrades documentation placeholders to `info` via a pattern list plus a Shannon-entropy heuristic, but that classifier can still leave the odd false positive — so every flagged \"secret\" was reviewed manually, and none was a real credential.",
   );
   L.push(`- Scanned ${scanDate}. Per-repo commit hashes are recorded in \`results/\` (git-ignored, not published).`);
   L.push("- Reproduce: `npm run study` then `npm run study:aggregate`.");

@@ -1,8 +1,8 @@
-# ctxaudit
+# ctxbudget
 
 **X-ray your AI agent's context — health and token cost in one command.**
 
-`ctxaudit` is an offline, developer-first auditor for the context files that drive AI coding agents (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `copilot-instructions.md`, skills, and connected MCP servers). It tells you two things most teams are flying blind on:
+`ctxbudget` is an offline, developer-first auditor for the context files that drive AI coding agents (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `copilot-instructions.md`, skills, and connected MCP servers). It tells you two things most teams are flying blind on:
 
 1. **Is my context healthy?** — oversized, truncated files and leaked secrets (redundancy, drift, and contradiction checks are on the [roadmap](#roadmap)).
 2. **What is my context costing me?** — how many tokens (and dollars) each piece eats on every single agent run.
@@ -15,10 +15,10 @@
 
 <!-- SCREENSHOT: replace with a color screenshot -->
 
-Running `ctxaudit` on a real repo (`browser-use/browser-use`):
+Running `ctxbudget` on a real repo (`browser-use/browser-use`):
 
 ```
-  ctxaudit · browser-use
+  ctxbudget · browser-use
   GRADE D  ·  always-on 11,647 tok/turn (5.8%)  ·  on-demand 11,720 tok
   always-on = read on every message · on-demand = only loaded when a skill/rule runs
 
@@ -56,13 +56,13 @@ A 2026 ETH Zürich study found that auto-generated, redundant context files *red
 - **Leaked secrets** — these files are committed *and* end up in the agent's logged context, so an API key or internal hostname in there is a real exposure.
 - **Invisible token cost** — config files, skills, and every connected MCP server's tool schema all consume the window on every run, and nobody is measuring it.
 
-The market is full of *generators* for these files. `ctxaudit` is the opposite: an **auditor**. It doesn't write your context for you — it tells you what's wrong with the context you have and what it's costing you.
+The market is full of *generators* for these files. `ctxbudget` is the opposite: an **auditor**. It doesn't write your context for you — it tells you what's wrong with the context you have and what it's costing you.
 
 ---
 
 ## What it does
 
-### `ctxaudit health` — context quality
+### `ctxbudget health` — context quality
 
 Scans every agent-context source in the repo and reports:
 
@@ -80,7 +80,7 @@ Output is a single **Context Health score** (A–F) plus an itemized, fixable li
 - **Contradictions** — conflicting rules (heuristic; optional semantic pass)
 - **Linter overlap** — rules a formatter/linter already enforces deterministically
 
-### `ctxaudit budget` — token cost
+### `ctxbudget budget` — token cost
 
 Not all context is loaded the same way, so `budget` reports **two** numbers instead of one — and this split is the whole point:
 
@@ -91,7 +91,7 @@ This matters because tools that sum everything into one "tokens/run" number lie 
 
 For each source `budget` shows its token weight and whether it's **always-on** or **on-demand**, the always-on share of the context window, and (with `--model`) the estimated always-on input cost per turn.
 
-MCP tool-schema accounting is the part no other tool gives you: connecting ten MCP servers can quietly burn thousands of *always-on* tokens on every turn before your prompt is even read. ctxaudit counts the schemas a server declares statically and — staying offline-first — flags servers that only expose tools at runtime instead of connecting to them.
+MCP tool-schema accounting is the part no other tool gives you: connecting ten MCP servers can quietly burn thousands of *always-on* tokens on every turn before your prompt is even read. ctxbudget counts the schemas a server declares statically and — staying offline-first — flags servers that only expose tools at runtime instead of connecting to them.
 
 ---
 
@@ -100,22 +100,22 @@ MCP tool-schema accounting is the part no other tool gives you: connecting ten M
 No install required:
 
 ```bash
-npx @gperiane/ctxaudit .        # health + budget for the current directory
+npx ctxbudget .        # health + budget for the current directory
 ```
 
-Or install it and use the short `ctxaudit` command:
+Or install it and use the short `ctxbudget` command:
 
 ```bash
-npm i -g @gperiane/ctxaudit
-ctxaudit health .                                      # quality checks only
-ctxaudit budget . --model claude-opus --mcp .mcp.json  # token cost only
-ctxaudit . --json                                      # machine-readable
-ctxaudit . --sarif > ctxaudit.sarif                    # GitHub code scanning
-ctxaudit . --md                                        # writes ctxaudit-report.md
-ctxaudit . --fail-on secrets/aws-key,error             # CI exit gate (see below)
+npm i -g ctxbudget
+ctxbudget health .                                      # quality checks only
+ctxbudget budget . --model claude-opus --mcp .mcp.json  # token cost only
+ctxbudget . --json                                      # machine-readable
+ctxbudget . --sarif > ctxbudget.sarif                    # GitHub code scanning
+ctxbudget . --md                                        # writes ctxbudget-report.md
+ctxbudget . --fail-on secrets/aws-key,error             # CI exit gate (see below)
 ```
 
-**Commands:** `ctxaudit [path]` (health + budget), `ctxaudit health [path]`, `ctxaudit budget [path]`.
+**Commands:** `ctxbudget [path]` (health + budget), `ctxbudget health [path]`, `ctxbudget budget [path]`.
 **Flags:** `--model <name>`, `--mcp <file>`, `--json`, `--sarif`, `--md`, `--fail-on <list>`.
 
 ### Detecting problems
@@ -123,7 +123,7 @@ ctxaudit . --fail-on secrets/aws-key,error             # CI exit gate (see below
 Point it at a `CLAUDE.md` that committed an AWS key, a real contact email, and a doc example (`user@example.com`):
 
 ```
-  ctxaudit · my-repo
+  ctxbudget · my-repo
   GRADE D
 
   1 AWS key in context · 1 email in context
@@ -142,7 +142,7 @@ The AWS key and the real contact email are flagged; the `user@example.com` doc e
 - **Terminal** — human-readable summary (default)
 - **`--json`** — machine-readable, for scripts
 - **`--sarif`** — drops findings straight into the GitHub Security tab
-- **`--md`** — a shareable `ctxaudit-report.md`
+- **`--md`** — a shareable `ctxbudget-report.md`
 
 ## CI / GitHub Actions
 
@@ -151,7 +151,7 @@ This repo dogfoods itself — see [`.github/workflows/ci.yml`](.github/workflows
 ```yaml
 - name: Context audit (self) — generate SARIF
   continue-on-error: true
-  run: node dist/cli.js . --sarif > ctxaudit.sarif
+  run: node dist/cli.js . --sarif > ctxbudget.sarif
 
 - name: Context audit gate — fail on leaked secrets
   run: node dist/cli.js . --fail-on secrets/private-key,secrets/aws-key,secrets/openai-key,secrets/generic-token
@@ -160,28 +160,28 @@ This repo dogfoods itself — see [`.github/workflows/ci.yml`](.github/workflows
   if: always()
   uses: github/codeql-action/upload-sarif@v3
   with:
-    sarif_file: ctxaudit.sarif
+    sarif_file: ctxbudget.sarif
 ```
 
 ---
 
 ## Philosophy
 
-- **Offline-first.** Your context never leaves your machine. No telemetry, ever. (Every cloud scanner asks you to upload the very config you're trying to keep private — `ctxaudit` doesn't.)
+- **Offline-first.** Your context never leaves your machine. No telemetry, ever. (Every cloud scanner asks you to upload the very config you're trying to keep private — `ctxbudget` doesn't.)
 - **Auditor, not generator.** It measures and explains; it never silently rewrites your files.
 - **GDPR-aware by default.** Secrets and PII detection is a first-class check, not an afterthought, because committed-and-logged context is a real data-exposure path.
 
 ---
 
-## Limitations — what ctxaudit doesn't see
+## Limitations — what ctxbudget doesn't see
 
-ctxaudit measures the **static** context on disk: `CLAUDE.md`, `AGENTS.md`, skills, `.cursorrules`, and the MCP tool schemas declared in your config. That's the part you can audit before a single turn runs.
+ctxbudget measures the **static** context on disk: `CLAUDE.md`, `AGENTS.md`, skills, `.cursorrules`, and the MCP tool schemas declared in your config. That's the part you can audit before a single turn runs.
 
 It does **not** see context injected at **runtime**:
 
 - **Dynamic memory systems** (MemPalace, mem0, and friends) that retrieve and inject content per query.
 - **Runtime RAG** that pulls documents into the prompt on the fly.
-- **MCP servers that only expose their tools on connect** — their schemas aren't in the static config, so ctxaudit reports them as `0` rather than guessing.
+- **MCP servers that only expose their tools on connect** — their schemas aren't in the static config, so ctxbudget reports them as `0` rather than guessing.
 
 A one-line `CLAUDE.md` that points at a memory system will score **light** even though it injects thousands of tokens on every turn.
 
@@ -217,7 +217,7 @@ Full aggregate report (offline, reproducible with `npm run study`): [`scripts/st
 
 ## Contributing
 
-Issues and PRs welcome. If `ctxaudit` should catch something it doesn't, open an issue with a minimal repro.
+Issues and PRs welcome. If `ctxbudget` should catch something it doesn't, open an issue with a minimal repro.
 
 ## License
 

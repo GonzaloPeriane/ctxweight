@@ -43,8 +43,8 @@ export function toSarif(report: HealthReport, version = "0.1.0"): unknown {
   const run: Record<string, unknown> = {
     tool: {
       driver: {
-        name: "ctxaudit",
-        informationUri: "https://github.com/GonzaloPeriane/ctxaudit",
+        name: "ctxbudget",
+        informationUri: "https://github.com/GonzaloPeriane/ctxbudget",
         version,
         rules,
       },

@@ -1,5 +1,5 @@
-// Reproducible repo study — dogfoods the BUILT ctxaudit (dist/cli.js).
-// Clones each repo shallowly, runs `ctxaudit <dir> --json`, and stores the
+// Reproducible repo study — dogfoods the BUILT ctxbudget (dist/cli.js).
+// Clones each repo shallowly, runs `ctxbudget <dir> --json`, and stores the
 // result per repo. It never reimplements audit logic; it only orchestrates.
 //
 //   npm run study                          scan every repo in repos.txt
@@ -55,7 +55,7 @@ function rmrf(dir: string): void {
 
 function main(): void {
   if (!existsSync(CLI)) {
-    console.error(`ctxaudit not built: ${CLI} missing. Run \`npm run build\` first.`);
+    console.error(`ctxbudget not built: ${CLI} missing. Run \`npm run build\` first.`);
     process.exit(1);
   }
   if (!existsSync(REPOS_FILE)) {
@@ -69,7 +69,7 @@ function main(): void {
     .map((l) => l.trim())
     .filter((l) => l && !l.startsWith("#"));
 
-  console.log(`ctxaudit study — ${urls.length} repo(s)\n`);
+  console.log(`ctxbudget study — ${urls.length} repo(s)\n`);
   let i = 0;
   for (const url of urls) {
     i++;
@@ -83,7 +83,7 @@ function main(): void {
       continue;
     }
 
-    const dir = path.join(os.tmpdir(), `ctxaudit-study-${slug}`);
+    const dir = path.join(os.tmpdir(), `ctxbudget-study-${slug}`);
     const result: Result = {
       url,
       owner,
@@ -119,7 +119,7 @@ function main(): void {
       });
       if (audit.status !== 0) {
         const why = audit.error?.message ?? ((audit.stderr || "").trim() || `exit ${audit.status}`);
-        throw new Error(`ctxaudit failed: ${why}`);
+        throw new Error(`ctxbudget failed: ${why}`);
       }
 
       const report = JSON.parse(audit.stdout) as {

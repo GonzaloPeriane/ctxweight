@@ -1,4 +1,4 @@
-# ctxaudit context study — candidate repos (~45)
+# ctxbudget context study — candidate repos (~45)
 # Source: Top-100 "AI Agents" GitHub ranking by stars (filtered).
 # Excluded: awesome-lists / guides / tutorials, pure skill collections, and
 # very large monorepos (langchain, tidb, airbyte, mlflow, nx) for clone speed.

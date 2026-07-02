@@ -1,6 +1,6 @@
 # AGENTS.md
 
-ctxaudit is a zero-dependency CLI that audits the **context** an AI coding agent
+ctxbudget is a zero-dependency CLI that audits the **context** an AI coding agent
 loads: it scores quality (`health`) and measures token cost (`budget`) of
 `CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `SKILL.md`, and connected MCP servers.
 Offline-first: nothing the user scans ever leaves their machine.
@@ -44,5 +44,5 @@ real tokenizer (`gpt-tokenizer`), MCP tool-schema accounting in `budget`,
 
 - Never log, store, or transmit scanned file contents. Offline-first is the
   product's core promise — no telemetry, no uploads.
-- Do not add a context-file *generator*. ctxaudit is an auditor by design.
+- Do not add a context-file *generator*. ctxbudget is an auditor by design.
 - Never put real secrets in test fixtures; use obvious fakes.

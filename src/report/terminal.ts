@@ -101,7 +101,7 @@ export function printTerminal(health?: HealthReport, budget?: BudgetReport, opts
   // Verdict block — the first, dominant thing. Blank line before and after.
   const label = scanLabel(health);
   console.log("");
-  console.log(gray(`  ctxaudit${label ? ` · ${label}` : ""}`));
+  console.log(gray(`  ctxbudget${label ? ` · ${label}` : ""}`));
   console.log(`  ${verdictLine(health, budget)}`);
   if (budget) {
     console.log(gray("  always-on = read on every message · on-demand = only loaded when a skill/rule runs"));
