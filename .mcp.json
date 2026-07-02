@@ -1,0 +1,53 @@
+{
+  "mcpServers": {
+    "weather": {
+      "command": "node",
+      "args": ["./servers/weather.js"],
+      "tools": [
+        {
+          "name": "get_current_weather",
+          "description": "Get the current weather conditions for a given location.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "City name or 'lat,lon' coordinates."
+              },
+              "units": {
+                "type": "string",
+                "enum": ["metric", "imperial"],
+                "description": "Unit system for temperature and wind speed."
+              }
+            },
+            "required": ["location"]
+          }
+        },
+        {
+          "name": "get_forecast",
+          "description": "Get a multi-day weather forecast for a given location.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "City name or 'lat,lon' coordinates."
+              },
+              "days": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 14,
+                "description": "Number of forecast days to return."
+              }
+            },
+            "required": ["location", "days"]
+          }
+        }
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"]
+    }
+  }
+}

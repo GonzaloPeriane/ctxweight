@@ -1,0 +1,62 @@
+# ctxaudit context study — candidate repos (~45)
+# Source: Top-100 "AI Agents" GitHub ranking by stars (filtered).
+# Excluded: awesome-lists / guides / tutorials, pure skill collections, and
+# very large monorepos (langchain, tidb, airbyte, mlflow, nx) for clone speed.
+# The scanner will auto-drop any repo with no agent-context files (N/A);
+# we keep the first ~30 that DO have context.
+#
+# One URL per line. '#' starts a comment.
+
+# --- already scanned (known to have context) ---
+https://github.com/openai/codex
+https://github.com/anthropics/claude-code
+https://github.com/cline/cline
+https://github.com/browser-use/browser-use
+https://github.com/continuedev/continue
+
+# --- coding agents / CLIs ---
+https://github.com/google-gemini/gemini-cli
+https://github.com/QwenLM/qwen-code
+https://github.com/charmbracelet/crush
+https://github.com/RooCodeInc/Roo-Code
+https://github.com/Kilo-Org/kilocode
+https://github.com/aaif-goose/goose
+https://github.com/SWE-agent/SWE-agent
+https://github.com/oraios/serena
+
+# --- agent frameworks / platforms ---
+https://github.com/Significant-Gravitas/AutoGPT
+https://github.com/langgenius/dify
+https://github.com/FoundationAgents/MetaGPT
+https://github.com/microsoft/autogen
+https://github.com/crewAIInc/crewAI
+https://github.com/agno-agi/agno
+https://github.com/openai/openai-agents-python
+https://github.com/langchain-ai/langgraph
+https://github.com/langchain-ai/deepagents
+https://github.com/google/adk-python
+https://github.com/mastra-ai/mastra
+https://github.com/vercel/ai
+https://github.com/CopilotKit/CopilotKit
+https://github.com/deepset-ai/haystack
+
+# --- browser / web agents ---
+https://github.com/vercel-labs/agent-browser
+https://github.com/bytedance/UI-TARS-desktop
+https://github.com/browserbase/stagehand
+
+# --- memory / context / tooling ---
+https://github.com/mem0ai/mem0
+https://github.com/letta-ai/letta
+https://github.com/composio/composio
+https://github.com/promptfoo/promptfoo
+
+# --- apps / assistants ---
+https://github.com/danny-avila/LibreChat
+https://github.com/khoj-ai/khoj
+https://github.com/lobehub/lobehub
+https://github.com/elizaOS/eliza
+https://github.com/activepieces/activepieces
+https://github.com/simstudioai/sim
+https://github.com/assafelovic/gpt-researcher
+https://github.com/infiniflow/ragflow

@@ -1,0 +1,6 @@
+# Example 3-repo list for smoke-testing the study pipeline.
+#   npm run study -- --repos scripts/study/repos.example.txt
+# Exercises every outcome: ok (has context) · n/a (no context) · error (bad URL).
+https://github.com/browser-use/browser-use
+https://github.com/octocat/Hello-World
+https://github.com/octocat/ctxaudit-does-not-exist

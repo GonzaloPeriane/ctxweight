@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm install)",
+      "PowerShell(npm run build 2>&1 | Select-Object -Last 3; Write-Output \"BUILD EXIT: $LASTEXITCODE\"; npm run typecheck 2>&1 | Select-Object -Last 3; Write-Output \"TYPECHECK EXIT: $LASTEXITCODE\")"
+    ]
+  }
+}

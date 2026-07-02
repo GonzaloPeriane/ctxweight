@@ -1,0 +1,45 @@
+{
+  "name": "ctxaudit",
+  "version": "0.1.0",
+  "description": "X-ray your AI agent's context — health and token cost in one command.",
+  "type": "module",
+  "bin": {
+    "ctxaudit": "dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "typecheck": "tsc --noEmit",
+    "test:secrets": "tsx scripts/test-secrets.ts",
+    "study": "tsx scripts/study/run-study.ts",
+    "study:aggregate": "tsx scripts/study/aggregate.ts"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "claude",
+    "context-engineering",
+    "agents-md",
+    "claude-md",
+    "tokens",
+    "lint",
+    "mcp"
+  ],
+  "author": "GonzaloPeriane",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "gpt-tokenizer": "^3.4.0"
+  }
+}
