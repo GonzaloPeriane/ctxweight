@@ -1,10 +1,13 @@
 {
-  "name": "ctxaudit",
+  "name": "@gperiane/ctxaudit",
   "version": "0.1.0",
   "description": "X-ray your AI agent's context — health and token cost in one command.",
   "type": "module",
   "bin": {
     "ctxaudit": "dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "dist"

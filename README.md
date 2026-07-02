@@ -100,18 +100,19 @@ MCP tool-schema accounting is the part no other tool gives you: connecting ten M
 No install required:
 
 ```bash
-npx ctxaudit .                 # health + budget for the current directory
+npx @gperiane/ctxaudit .        # health + budget for the current directory
 ```
 
-Run a single command, and pick an output format:
+Or install it and use the short `ctxaudit` command:
 
 ```bash
-npx ctxaudit health .                                      # quality checks only
-npx ctxaudit budget . --model claude-opus --mcp .mcp.json  # token cost only
-npx ctxaudit . --json                                      # machine-readable
-npx ctxaudit . --sarif > ctxaudit.sarif                    # GitHub code scanning
-npx ctxaudit . --md                                        # writes ctxaudit-report.md
-npx ctxaudit . --fail-on secrets/aws-key,error             # CI exit gate (see below)
+npm i -g @gperiane/ctxaudit
+ctxaudit health .                                      # quality checks only
+ctxaudit budget . --model claude-opus --mcp .mcp.json  # token cost only
+ctxaudit . --json                                      # machine-readable
+ctxaudit . --sarif > ctxaudit.sarif                    # GitHub code scanning
+ctxaudit . --md                                        # writes ctxaudit-report.md
+ctxaudit . --fail-on secrets/aws-key,error             # CI exit gate (see below)
 ```
 
 **Commands:** `ctxaudit [path]` (health + budget), `ctxaudit health [path]`, `ctxaudit budget [path]`.
